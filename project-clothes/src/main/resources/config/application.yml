@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: project-clothes
+  datasource:
+    url: jdbc:mysql://localhost:3307/demo
+    username: root
+    password: 28042003
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dinhxuantruong2003coi@gmail.com
+    password: ttqx dwgn usym nsep
+    properties:
+      mail:
+        auth:
+        starttls:
+          enable: true
+    default-encoding: UTF-8
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework: INFO
+    com.t3h.projectclothes: DEBUG
+
+
+
