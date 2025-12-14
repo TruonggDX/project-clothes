@@ -21,6 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @MappedSuperclass
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BaseEntity {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
