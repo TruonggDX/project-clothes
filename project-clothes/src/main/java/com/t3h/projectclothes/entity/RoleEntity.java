@@ -2,10 +2,13 @@ package com.t3h.projectclothes.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "roles")
@@ -14,13 +17,14 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role extends BaseEntity {
+@FieldDefaults(level = PRIVATE)
+public class RoleEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true, length = 255)
     String name;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(mappedBy = "roles")
     @Builder.Default
-    List<UserRole> userRoles = new ArrayList<>();
+    Set<UserEntity> users = new HashSet<>();
 }
 

@@ -2,10 +2,10 @@ package com.t3h.projectclothes.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "carts")
@@ -14,14 +14,11 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cart extends BaseEntity {
+@FieldDefaults(level = PRIVATE)
+public class CartEntity extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
-    User user;
-
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    List<CartItem> cartItems = new ArrayList<>();
+    UserEntity user;
 }
 

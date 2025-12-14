@@ -2,7 +2,10 @@ package com.t3h.projectclothes.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "coupon_usages")
@@ -11,18 +14,19 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CouponUsage extends BaseEntity {
+@FieldDefaults(level = PRIVATE)
+public class CouponUsageEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id", nullable = false)
-    Coupon coupon;
+    CouponEntity coupon;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    User user;
+    UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
-    Order order;
+    OrderEntity order;
 }
 

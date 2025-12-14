@@ -1,13 +1,15 @@
 package com.t3h.projectclothes.entity;
 
+import com.t3h.projectclothes.enums.DiscountType;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "coupons")
@@ -16,7 +18,8 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Coupon extends BaseEntity {
+@FieldDefaults(level = PRIVATE)
+public class CouponEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true, length = 255)
     String code;
@@ -33,13 +36,5 @@ public class Coupon extends BaseEntity {
 
     @Column(nullable = false)
     LocalDateTime expiredAt;
-
-    @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    List<CouponUsage> couponUsages = new ArrayList<>();
-
-    public enum DiscountType {
-        PERCENTAGE, FIXED_AMOUNT
-    }
 }
 

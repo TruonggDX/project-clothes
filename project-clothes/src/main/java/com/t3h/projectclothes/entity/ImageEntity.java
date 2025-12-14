@@ -2,20 +2,28 @@ package com.t3h.projectclothes.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
+import static lombok.AccessLevel.PRIVATE;
+
 @Entity
-@Table(name = "product_images")
+@Table(name = "images")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductImage extends BaseEntity {
+@FieldDefaults(level = PRIVATE)
+public class ImageEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    Product product;
+    @JoinColumn(name = "product_id")
+    ProductEntity product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    UserEntity user;
 
     @Column(nullable = false, length = 255)
     String imageUrl;

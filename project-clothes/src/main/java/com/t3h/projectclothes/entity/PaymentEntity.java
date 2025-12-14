@@ -1,10 +1,15 @@
 package com.t3h.projectclothes.entity;
 
+import com.t3h.projectclothes.enums.PaymentMethod;
+import com.t3h.projectclothes.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "payments")
@@ -13,11 +18,12 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment extends BaseEntity {
+@FieldDefaults(level = PRIVATE)
+public class PaymentEntity extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false, unique = true)
-    Order order;
+    OrderEntity order;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -32,13 +38,5 @@ public class Payment extends BaseEntity {
 
     @Column
     LocalDateTime paidAt;
-
-    public enum PaymentMethod {
-        CASH, CREDIT_CARD, DEBIT_CARD, BANK_TRANSFER, E_WALLET, COD
-    }
-
-    public enum PaymentStatus {
-        PENDING, PROCESSING, COMPLETED, FAILED, REFUNDED
-    }
 }
 

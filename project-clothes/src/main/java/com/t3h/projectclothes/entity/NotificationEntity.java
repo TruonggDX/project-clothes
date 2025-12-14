@@ -2,7 +2,10 @@ package com.t3h.projectclothes.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "notifications")
@@ -11,11 +14,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notification extends BaseEntity {
+@FieldDefaults(level = PRIVATE)
+public class NotificationEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    User user;
+    UserEntity user;
 
     @Column(nullable = false, length = 255)
     String title;

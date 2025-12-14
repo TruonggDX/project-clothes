@@ -2,10 +2,10 @@ package com.t3h.projectclothes.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "brands")
@@ -14,13 +14,10 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Brand extends BaseEntity {
+@FieldDefaults(level = PRIVATE)
+public class BrandEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true, length = 255)
     String name;
-
-    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    List<Product> products = new ArrayList<>();
 }
 
