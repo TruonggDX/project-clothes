@@ -35,4 +35,6 @@ public class BaseEntity {
 
   @UpdateTimestamp
   LocalDateTime updatedDate;
+
+  Boolean isDeleted;
 }
