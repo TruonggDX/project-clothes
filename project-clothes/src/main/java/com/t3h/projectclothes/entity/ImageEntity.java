@@ -14,22 +14,21 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ImageEntity extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    ProductEntity product;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    UserEntity user;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_id")
+  ProductEntity product;
 
-    @Column(nullable = false, length = 255)
-    String imageUrl;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  UserEntity user;
 
-    @Column(nullable = false)
-    @Builder.Default
-    Boolean isPrimary = false;
+  @Column(nullable = false, length = 255)
+  String imageUrl;
 }
 

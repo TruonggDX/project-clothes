@@ -1,15 +1,22 @@
 package com.t3h.projectclothes.entity;
 
-import com.t3h.projectclothes.enums.PaymentMethod;
-import com.t3h.projectclothes.enums.PaymentStatus;
-import jakarta.persistence.*;
-import lombok.*;
+import com.t3h.projectclothes.utils.enums.PaymentMethod;
+import com.t3h.projectclothes.utils.enums.PaymentStatus;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDateTime;
-
-import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "payments")
@@ -18,25 +25,22 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentEntity extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false, unique = true)
-    OrderEntity order;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    PaymentMethod method;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "order_id", nullable = false, unique = true)
+  OrderEntity order;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    PaymentStatus status;
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  PaymentMethod method;
 
-    @Column(length = 255)
-    String transactionId;
-
-    @Column
-    LocalDateTime paidAt;
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  PaymentStatus status;
 }
 

@@ -1,6 +1,5 @@
 package com.t3h.projectclothes.entity;
 
-import com.t3h.projectclothes.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,8 +8,6 @@ import lombok.experimental.SuperBuilder;
 import java.util.HashSet;
 import java.util.Set;
 
-import static lombok.AccessLevel.PRIVATE;
-
 @Entity
 @Table(name = "users")
 @Data
@@ -18,31 +15,32 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserEntity extends BaseEntity {
 
-    @Column(nullable = false, length = 255)
-    String name;
+  @Column(unique = true, nullable = false)
+  String code;
 
-    @Column(nullable = false, unique = true, length = 255)
-    String email;
+  @Column(nullable = false)
+  String name;
 
-    @Column(nullable = false, length = 255)
-    String password;
+  @Column(nullable = false, unique = true)
+  String email;
 
-    @Column(length = 255)
-    String phone;
+  @Column(nullable = false)
+  String password;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    UserStatus status;
+  @Column(unique = true)
+  String phone;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @Builder.Default
-    Set<RoleEntity> roles = new HashSet<>();
+  boolean enabled;
+
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "user_role",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @Builder.Default
+  Set<RoleEntity> roles = new HashSet<>();
 }
 

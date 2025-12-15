@@ -14,14 +14,17 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryEntity extends BaseEntity {
 
-    @Column(nullable = false, length = 255)
-    String name;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    CategoryEntity parent;
+  @Column(nullable = false)
+  String name;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "parent_id")
+  CategoryEntity parent;
 }
 

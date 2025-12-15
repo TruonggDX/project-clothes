@@ -18,30 +18,32 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductVariantEntity extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    @EqualsAndHashCode.Exclude
-    ProductEntity product;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_id", nullable = false)
+  @EqualsAndHashCode.Exclude
+  ProductEntity product;
 
-    @Column(nullable = false, unique = true, length = 255)
-    String code;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @Column(nullable = false, precision = 19, scale = 2)
-    BigDecimal price;
+  @Column(nullable = false, precision = 19, scale = 2)
+  BigDecimal price;
 
-    @Column(nullable = false)
-    Long quantity;
+  @Column(nullable = false)
+  Long quantity;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "variant_attribute_value",
-            joinColumns = @JoinColumn(name = "variant_id"),
-            inverseJoinColumns = @JoinColumn(name = "attribute_value_id"))
-    @Builder.Default
-    @EqualsAndHashCode.Exclude
-    Set<AttributeValueEntity> attributeValues = new HashSet<>();
+  Long discount;
+
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "variant_attribute_value",
+      joinColumns = @JoinColumn(name = "variant_id"),
+      inverseJoinColumns = @JoinColumn(name = "attribute_value_id"))
+  @Builder.Default
+  @EqualsAndHashCode.Exclude
+  Set<AttributeValueEntity> attributeValues = new HashSet<>();
 }
 

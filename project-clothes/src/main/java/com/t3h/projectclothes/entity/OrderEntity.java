@@ -1,6 +1,6 @@
 package com.t3h.projectclothes.entity;
 
-import com.t3h.projectclothes.enums.OrderStatus;
+import com.t3h.projectclothes.utils.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -17,22 +17,22 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderEntity extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    UserEntity user;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", nullable = false)
-    AddressEntity address;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  UserEntity user;
 
-    @Column(nullable = false, precision = 19, scale = 2)
-    BigDecimal totalPrice;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "address_id", nullable = false)
+  AddressEntity address;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    OrderStatus status;
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  OrderStatus status;
 }
 

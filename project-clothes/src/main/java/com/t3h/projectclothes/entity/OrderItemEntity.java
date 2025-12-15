@@ -16,21 +16,28 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderItemEntity extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
-    OrderEntity order;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_variant_id", nullable = false)
-    ProductVariantEntity productVariant;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "order_id", nullable = false)
+  OrderEntity order;
 
-    @Column(nullable = false, precision = 19, scale = 2)
-    BigDecimal price;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_variant_id", nullable = false)
+  ProductVariantEntity productVariant;
 
-    @Column(nullable = false)
-    Integer quantity;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_id", nullable = false)
+  ProductEntity product;
+
+  @Column(nullable = false, precision = 19, scale = 2)
+  BigDecimal price;
+
+  @Column(nullable = false)
+  Integer quantity;
 }
 

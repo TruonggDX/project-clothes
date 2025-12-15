@@ -14,21 +14,24 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ReviewEntity extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    UserEntity user;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    ProductEntity product;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  UserEntity user;
 
-    @Column(nullable = false)
-    Integer rating;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_id", nullable = false)
+  ProductEntity product;
 
-    @Column(columnDefinition = "TEXT")
-    String comment;
+  @Column(nullable = false)
+  Integer rating;
+
+  @Column(columnDefinition = "TEXT")
+  String comment;
 }
 

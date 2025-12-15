@@ -1,14 +1,21 @@
 package com.t3h.projectclothes.entity;
 
-import com.t3h.projectclothes.enums.ProductStatus;
-import jakarta.persistence.*;
-import lombok.*;
+import com.t3h.projectclothes.utils.enums.ProductStatus;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-
-import java.math.BigDecimal;
-
-import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "products")
@@ -17,28 +24,28 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductEntity extends BaseEntity {
 
-    @Column(nullable = false, length = 255)
-    String name;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @Column(columnDefinition = "TEXT")
-    String description;
+  @Column(nullable = false)
+  String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    CategoryEntity category;
+  @Column(columnDefinition = "TEXT")
+  String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id", nullable = false)
-    BrandEntity brand;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "category_id", nullable = false)
+  CategoryEntity category;
 
-    @Column(nullable = false, precision = 19, scale = 2)
-    BigDecimal basePrice;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "brand_id", nullable = false)
+  BrandEntity brand;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    ProductStatus status;
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  ProductStatus status;
 }
 

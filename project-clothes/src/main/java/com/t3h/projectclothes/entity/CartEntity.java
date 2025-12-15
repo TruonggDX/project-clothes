@@ -14,11 +14,25 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CartEntity extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
-    UserEntity user;
+  @Column(nullable = false, unique = true)
+  String code;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false, unique = true)
+  UserEntity user;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_variant_id", nullable = false)
+  ProductVariantEntity productVariant;
+
+  @Column(nullable = false)
+  Integer quantity;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_id", nullable = false)
+  ProductEntity product;
 }
 

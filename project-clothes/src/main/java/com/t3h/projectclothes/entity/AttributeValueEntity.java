@@ -17,23 +17,23 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AttributeValueEntity extends BaseEntity {
 
-    @Column(nullable = false, length = 255)
-    String value;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @Column(length = 255)
-    String colorCode;
+  @Column(nullable = false)
+  String value;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attribute_id", nullable = false)
-    @EqualsAndHashCode.Exclude
-    AttributeEntity attribute;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "attribute_id", nullable = false)
+  @EqualsAndHashCode.Exclude
+  AttributeEntity attribute;
 
-    @ManyToMany(mappedBy = "attributeValues", fetch = FetchType.LAZY)
-    @Builder.Default
-    @EqualsAndHashCode.Exclude
-    Set<ProductVariantEntity> productVariants = new HashSet<>();
+  @ManyToMany(mappedBy = "attributeValues", fetch = FetchType.LAZY)
+  @Builder.Default
+  @EqualsAndHashCode.Exclude
+  Set<ProductVariantEntity> productVariants = new HashSet<>();
 }
 

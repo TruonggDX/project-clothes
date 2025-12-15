@@ -14,10 +14,13 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class BrandEntity extends BaseEntity {
 
-    @Column(nullable = false, unique = true, length = 255)
-    String name;
+  @Column(nullable = false, unique = true)
+  String code;
+
+  @Column(nullable = false, unique = true)
+  String name;
 }
 

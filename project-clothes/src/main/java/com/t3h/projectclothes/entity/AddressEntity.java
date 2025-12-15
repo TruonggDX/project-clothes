@@ -1,11 +1,18 @@
 package com.t3h.projectclothes.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-
-import static lombok.AccessLevel.PRIVATE;
 
 @Entity
 @Table(name = "addresses")
@@ -14,27 +21,26 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AddressEntity extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    UserEntity user;
+  @Column(nullable = false, unique = true)
+  String code;
 
-    @Column(nullable = false, length = 255)
-    String province;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  UserEntity user;
 
-    @Column(nullable = false, length = 255)
-    String district;
+  @Column(nullable = false, length = 255)
+  String province;
 
-    @Column(nullable = false, length = 255)
-    String ward;
+  @Column(nullable = false, length = 255)
+  String district;
 
-    @Column(nullable = false, length = 255)
-    String detail;
+  @Column(nullable = false, length = 255)
+  String ward;
 
-    @Column(nullable = false)
-    @Builder.Default
-    Boolean isDefault = false;
+  @Column(nullable = false, length = 255)
+  String detail;
 }
 

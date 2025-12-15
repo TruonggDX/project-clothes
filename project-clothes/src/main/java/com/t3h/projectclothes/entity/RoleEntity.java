@@ -1,14 +1,18 @@
 package com.t3h.projectclothes.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-import lombok.experimental.SuperBuilder;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
-
-import static lombok.AccessLevel.PRIVATE;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "roles")
@@ -17,14 +21,16 @@ import static lombok.AccessLevel.PRIVATE;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoleEntity extends BaseEntity {
 
-    @Column(nullable = false, unique = true, length = 255)
-    String name;
+  @Column(unique = true, nullable = false)
+  String code;
 
-    @ManyToMany(mappedBy = "roles")
-    @Builder.Default
-    Set<UserEntity> users = new HashSet<>();
+  @Column(nullable = false, unique = true)
+  String name;
+
+  @ManyToMany(mappedBy = "roles")
+  Set<UserEntity> users = new HashSet<>();
 }
 
