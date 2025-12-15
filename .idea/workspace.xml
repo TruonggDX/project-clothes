@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5650ace3-3185-4109-9998-93f20ef47eb0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/AuditLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Brand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Cart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/CartItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Coupon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/CouponUsage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Notification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/OrderItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/OrderStatusHistory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Payment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/ProductImage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/ProductVariant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Review.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/StockLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/java/com/t3h/projectclothes/entity/UserRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-clothes/src/main/resources/config/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/project-clothes/src/main/resources/config/application.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/project-clothes">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="project-clothes" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="36pHK54lxH2JHSBX6ESyUroFxzL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.ProjectClothesApplication.executor": "Run",
+    "git-widget-placeholder": "BaseEntity",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Back-end/project-clothes",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="ProjectClothesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="project-clothes.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.t3h.projectclothes.ProjectClothesApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5650ace3-3185-4109-9998-93f20ef47eb0" name="Changes" comment="" />
+      <created>1765696525585</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765696525585</updated>
+      <workItem from="1765696527517" duration="786000" />
+      <workItem from="1765699908938" duration="4014000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
