@@ -15,21 +15,48 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional()
 @RequiredArgsConstructor
-public class RoleServiceImpl implements RoleService {
+  public class RoleServiceImpl implements RoleService {
 
   private final RoleRepository roleRepository;
   private final RoleMapper roleMapper;
 
   @Override
   public List<RoleDto> getAll() {
-    List<RoleEntity> roleEntities = roleRepository.getALlRole();
+    List<RoleEntity> roleEntities = roleRepository.getAllRole();
     return roleEntities.stream().map(roleMapper::toDto).toList();
+  }
+
+  @Override
+  public RoleDto getById(Long id) {
+    RoleEntity roleEntity = getActiveRole(id);
+    return roleMapper.toDto(roleEntity);
   }
 
   @Override
   public RoleDto add(RoleRequest request) {
     RoleEntity roleEntity = roleMapper.toRequest(request);
     roleEntity.setCode(GenerateCode.generateCode());
+    roleEntity.setIsDeleted(false);
     return roleMapper.toDto(roleRepository.save(roleEntity));
+  }
+
+  @Override
+  public RoleDto update(Long id, RoleRequest request) {
+    RoleEntity roleEntity = getActiveRole(id);
+    roleEntity.setName(request.getName());
+    return roleMapper.toDto(roleRepository.save(roleEntity));
+  }
+
+  @Override
+  public void delete(Long id) {
+    RoleEntity roleEntity = getActiveRole(id);
+    roleEntity.setIsDeleted(true);
+    roleRepository.save(roleEntity);
+  }
+
+  private RoleEntity getActiveRole(Long id) {
+    return roleRepository
+        .findByIdAndIsDeletedFalse(id)
+        .orElseThrow(() -> new RuntimeException("Role not found"));
   }
 }
