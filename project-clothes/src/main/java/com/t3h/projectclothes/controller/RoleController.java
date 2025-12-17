@@ -25,28 +25,24 @@ public class RoleController {
   private final RoleService roleService;
 
   @GetMapping("/list")
-  public ResponseEntity<List<RoleDto>> list() {
-    List<RoleDto> roleDtos = roleService.getAll();
-    return ResponseEntity.ok(roleDtos);
+  public ResponseEntity<BaseResponse<List<RoleDto>>> list() {
+    return ResponseEntity.ok(BaseResponse.success(roleService.getAll()));
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<BaseResponse<RoleDto>> getById(@PathVariable Long id) {
-    RoleDto dto = roleService.getById(id);
-    return ResponseEntity.ok(BaseResponse.success(dto));
+    return ResponseEntity.ok(BaseResponse.success(roleService.getById(id)));
   }
 
   @PostMapping
   public ResponseEntity<BaseResponse<RoleDto>> create(@Valid @RequestBody RoleRequest request) {
-    RoleDto dto = roleService.add(request);
-    return ResponseEntity.ok(BaseResponse.success(dto));
+    return ResponseEntity.ok(BaseResponse.success(roleService.add(request)));
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<BaseResponse<RoleDto>> update(
       @PathVariable Long id, @Valid @RequestBody RoleRequest request) {
-    RoleDto dto = roleService.update(id, request);
-    return ResponseEntity.ok(BaseResponse.success(dto));
+    return ResponseEntity.ok(BaseResponse.success(roleService.update(id, request)));
   }
 
   @DeleteMapping("/{id}")
