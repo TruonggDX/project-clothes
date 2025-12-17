@@ -47,3 +47,6 @@ public class ProductVariantEntity extends BaseEntity {
   Set<AttributeValueEntity> attributeValues = new HashSet<>();
 }
 
+
+
+

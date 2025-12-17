@@ -24,3 +24,6 @@ public class BrandEntity extends BaseEntity {
   String name;
 }
 
+
+
+

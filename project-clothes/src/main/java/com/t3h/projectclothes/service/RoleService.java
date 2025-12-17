@@ -8,5 +8,11 @@ public interface RoleService {
 
   List<RoleDto> getAll();
 
+  RoleDto getById(Long id);
+
   RoleDto add(RoleRequest request);
+
+  RoleDto update(Long id, RoleRequest request);
+
+  void delete(Long id);
 }

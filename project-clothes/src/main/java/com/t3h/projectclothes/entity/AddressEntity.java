@@ -44,3 +44,6 @@ public class AddressEntity extends BaseEntity {
   String detail;
 }
 
+
+
+

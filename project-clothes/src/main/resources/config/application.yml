@@ -1,8 +1,8 @@
 spring:
   application:
-    name: project-clothes
+    name: project_clothes
   datasource:
-    url: jdbc:mysql://localhost:3306
+    url: jdbc:mysql://localhost:3306/project_clothes
     username: root
     password: 123456789
   jpa:
