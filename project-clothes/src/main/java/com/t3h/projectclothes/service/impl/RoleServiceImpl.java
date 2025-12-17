@@ -3,6 +3,7 @@ package com.t3h.projectclothes.service.impl;
 import com.t3h.projectclothes.dto.role.RoleDto;
 import com.t3h.projectclothes.dto.role.RoleRequest;
 import com.t3h.projectclothes.entity.RoleEntity;
+import com.t3h.projectclothes.exception.BusinessException;
 import com.t3h.projectclothes.mapper.RoleMapper;
 import com.t3h.projectclothes.repository.RoleRepository;
 import com.t3h.projectclothes.service.RoleService;
@@ -57,6 +58,6 @@ import org.springframework.transaction.annotation.Transactional;
   private RoleEntity getActiveRole(Long id) {
     return roleRepository
         .findByIdAndIsDeletedFalse(id)
-        .orElseThrow(() -> new RuntimeException("Role not found"));
+        .orElseThrow(() -> BusinessException.notFound("Role not found with id: " + id));
   }
 }
