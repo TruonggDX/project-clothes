@@ -1,6 +1,6 @@
 package com.t3h.projectclothes.controller;
 
-import com.t3h.projectclothes.dto.common.ApiResponse;
+import com.t3h.projectclothes.dto.common.BaseResponse;
 import com.t3h.projectclothes.dto.role.RoleDto;
 import com.t3h.projectclothes.dto.role.RoleRequest;
 import com.t3h.projectclothes.service.RoleService;
@@ -31,27 +31,27 @@ public class RoleController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ApiResponse<RoleDto>> getById(@PathVariable Long id) {
+  public ResponseEntity<BaseResponse<RoleDto>> getById(@PathVariable Long id) {
     RoleDto dto = roleService.getById(id);
-    return ResponseEntity.ok(ApiResponse.success(dto));
+    return ResponseEntity.ok(BaseResponse.success(dto));
   }
 
   @PostMapping
-  public ResponseEntity<ApiResponse<RoleDto>> create(@Valid @RequestBody RoleRequest request) {
+  public ResponseEntity<BaseResponse<RoleDto>> create(@Valid @RequestBody RoleRequest request) {
     RoleDto dto = roleService.add(request);
-    return ResponseEntity.ok(ApiResponse.success(dto));
+    return ResponseEntity.ok(BaseResponse.success(dto));
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<ApiResponse<RoleDto>> update(
+  public ResponseEntity<BaseResponse<RoleDto>> update(
       @PathVariable Long id, @Valid @RequestBody RoleRequest request) {
     RoleDto dto = roleService.update(id, request);
-    return ResponseEntity.ok(ApiResponse.success(dto));
+    return ResponseEntity.ok(BaseResponse.success(dto));
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
+  public ResponseEntity<BaseResponse<Void>> delete(@PathVariable Long id) {
     roleService.delete(id);
-    return ResponseEntity.ok(ApiResponse.success(null));
+    return ResponseEntity.ok(BaseResponse.success(null));
   }
 }
