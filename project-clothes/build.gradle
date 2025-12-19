@@ -42,6 +42,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-mail"
     implementation 'org.mapstruct:mapstruct:1.5.2.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+    implementation 'com.cloudinary:cloudinary-core:1.38.0'
+    implementation 'com.cloudinary:cloudinary-http45:1.38.0'
 }
 
 tasks.named('test') {

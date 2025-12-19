@@ -20,29 +20,23 @@ public class AttributeController {
 
     @GetMapping("/list")
     public ResponseEntity<BaseResponse<List<AttributeDto>>> list() {
-        List<AttributeDto> attributes = attributeService.getAll();
-        return ResponseEntity.ok(BaseResponse.success(attributes));
+        return ResponseEntity.ok(BaseResponse.success(attributeService.getAll()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BaseResponse<AttributeDto>> getById(@PathVariable Long id) {
-        AttributeDto attribute = attributeService.getById(id);
-        return ResponseEntity.ok(BaseResponse.success(attribute));
+        return ResponseEntity.ok(BaseResponse.success(attributeService.getById(id)));
     }
 
     @PostMapping
     public ResponseEntity<BaseResponse<AttributeDto>> create(@Valid @RequestBody AttributeRequest request) {
-        AttributeDto attribute = attributeService.add(request);
-        return ResponseEntity.ok(BaseResponse.success(attribute));
+        return ResponseEntity.ok(BaseResponse.success(attributeService.add(request)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<BaseResponse<AttributeDto>> update(
-            @PathVariable Long id,
-            @Valid @RequestBody AttributeRequest request
-    ) {
-        AttributeDto attribute = attributeService.update(id, request);
-        return ResponseEntity.ok(BaseResponse.success(attribute));
+            @PathVariable Long id, @Valid @RequestBody AttributeRequest request) {
+        return ResponseEntity.ok(BaseResponse.success(attributeService.update(id, request)));
     }
 
     @DeleteMapping("/{id}")

@@ -15,7 +15,9 @@ public interface AttributeValueMapper {
     AttributeValueDto toDto(AttributeValueEntity entity);
     
     AttributeValueEntity toEntity(AttributeValueDto dto);
-    
+
+    AttributeValueEntity toRequest(AttributeValueRequest request);
+
     void updateAttributeValue(AttributeValueRequest request, @MappingTarget AttributeValueEntity entity);
 }
 

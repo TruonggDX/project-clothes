@@ -7,6 +7,7 @@ import com.t3h.projectclothes.dto.brand.BrandDto;
 import java.util.List;
 
 public interface AttributeService {
+
     List<AttributeDto> getAll();
 
     AttributeDto getById(Long id);

@@ -17,55 +17,35 @@ import java.util.List;
 public class AttributeValueController {
 
     private final AttributeValueService attributeValueService;
-    /**
-     * GET /api/v1/attribute-value/list
-     */
+
     @GetMapping("/list")
     public ResponseEntity<BaseResponse<List<AttributeValueDto>>> list() {
-        List<AttributeValueDto> attributeValues = attributeValueService.getAll();
-        return ResponseEntity.ok(BaseResponse.success(attributeValues));
+        return ResponseEntity.ok(BaseResponse.success(attributeValueService.getAll()));
     }
-    /**
-     * GET /api/v1/attribute-value/attribute/{attributeId}
-     */
+
     @GetMapping("/attribute/{attributeId}")
     public ResponseEntity<BaseResponse<List<AttributeValueDto>>> getByAttributeId(
-            @PathVariable Long attributeId
-    ) {
-        List<AttributeValueDto> attributeValues = attributeValueService.getByAttributeId(attributeId);
-        return ResponseEntity.ok(BaseResponse.success(attributeValues));
+            @PathVariable Long attributeId) {
+        return ResponseEntity.ok(BaseResponse.success(attributeValueService.getByAttributeId(attributeId)));
     }
     @GetMapping("/{id}")
     public ResponseEntity<BaseResponse<AttributeValueDto>> getById(@PathVariable Long id) {
-        AttributeValueDto attributeValue = attributeValueService.getById(id);
-        return ResponseEntity.ok(BaseResponse.success(attributeValue));
+        return ResponseEntity.ok(BaseResponse.success(attributeValueService.getById(id)));
     }
-    /**
-     * POST /api/v1/attribute-value
-     * Body: { "value": "Red", "attributeId": 1 }
-     */
+
     @PostMapping
     public ResponseEntity<BaseResponse<AttributeValueDto>> create(
-            @Valid @RequestBody AttributeValueRequest request
-    ) {
-        AttributeValueDto attributeValue = attributeValueService.add(request);
-        return ResponseEntity.ok(BaseResponse.success(attributeValue));
+            @Valid @RequestBody AttributeValueRequest request) {
+        return ResponseEntity.ok(BaseResponse.success(attributeValueService.add(request)));
     }
-    /**
-     * PUT /api/v1/attribute-value/{id}
-     * Body: { "value": "Blue", "attributeId": 1 }
-     */
+
     @PutMapping("/{id}")
     public ResponseEntity<BaseResponse<AttributeValueDto>> update(
             @PathVariable Long id,
-            @Valid @RequestBody AttributeValueRequest request
-    ) {
-        AttributeValueDto attributeValue = attributeValueService.update(id, request);
-        return ResponseEntity.ok(BaseResponse.success(attributeValue));
+            @Valid @RequestBody AttributeValueRequest request) {
+        return ResponseEntity.ok(BaseResponse.success(attributeValueService.update(id, request)));
     }
-    /**
-     * DELETE /api/v1/attribute-value/{id}
-     */
+
     @DeleteMapping("/{id}")
     public ResponseEntity<BaseResponse<Void>> delete(@PathVariable Long id) {
         attributeValueService.delete(id);
