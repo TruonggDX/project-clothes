@@ -20,29 +20,23 @@ public class CategoryController {
 
     @GetMapping("/list")
     public ResponseEntity<BaseResponse<List<CategoryDto>>> list() {
-        List<CategoryDto> categories = categoryService.getAll();
-        return ResponseEntity.ok(BaseResponse.success(categories));
+        return ResponseEntity.ok(BaseResponse.success(categoryService.getAll()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BaseResponse<CategoryDto>> getById(@PathVariable Long id) {
-        CategoryDto category = categoryService.getById(id);
-        return ResponseEntity.ok(BaseResponse.success(category));
+        return ResponseEntity.ok(BaseResponse.success(categoryService.getById(id)));
     }
 
     @PostMapping
     public ResponseEntity<BaseResponse<CategoryDto>> create(@Valid @RequestBody CategoryRequest request) {
-        CategoryDto category = categoryService.add(request);
-        return ResponseEntity.ok(BaseResponse.success(category));
+        return ResponseEntity.ok(BaseResponse.success(categoryService.add(request)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<BaseResponse<CategoryDto>> update(
-            @PathVariable Long id,
-            @Valid @RequestBody CategoryRequest request
-    ) {
-        CategoryDto category = categoryService.update(id, request);
-        return ResponseEntity.ok(BaseResponse.success(category));
+            @PathVariable Long id, @Valid @RequestBody CategoryRequest request) {
+        return ResponseEntity.ok(BaseResponse.success(categoryService.update(id, request)));
     }
 
     @DeleteMapping("/{id}")

@@ -1,5 +1,7 @@
 package com.t3h.projectclothes.dto.productvariant;
 
+import com.t3h.projectclothes.dto.attributevalue.AttributeValueResponse;
+import com.t3h.projectclothes.dto.product.ProductResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +20,7 @@ public class ProductVariantDto {
     private BigDecimal price;
     private Long quantity;
     private Long discount;
-    private Long productId;
-    private String productName;
-    private Set<Long> attributeValueIds;
+    private ProductResponse product;
+    private Set<AttributeValueResponse> attributeValues;
 }
 

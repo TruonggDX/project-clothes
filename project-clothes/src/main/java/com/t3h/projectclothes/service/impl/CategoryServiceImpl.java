@@ -39,7 +39,6 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryEntity entity = categoryMapper.toEntity(request);
         entity.setCode(GenerateCode.generateCode());
         entity.setIsDeleted(false);
-        // xử lý parent nếu có
         if (request.getParentId() != null) {
             CategoryEntity parent = getActiveCategory(request.getParentId());
             entity.setParent(parent);
@@ -51,12 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto update(Long id, CategoryRequest request) {
         CategoryEntity entity = getActiveCategory(id);
         categoryMapper.updateCategory(request, entity);
-        if (request.getParentId() != null) {
-            CategoryEntity parent = getActiveCategory(request.getParentId());
-            entity.setParent(parent);
-        } else {
-            entity.setParent(null);
-        }
+        entity.setParent(request.getParentId() == null ? null : getActiveCategory(request.getParentId()));
         return categoryMapper.toDto(categoryRepository.save(entity));
     }
 

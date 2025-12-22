@@ -1,11 +1,14 @@
 package com.t3h.projectclothes.controller;
 
 import com.t3h.projectclothes.dto.common.BaseResponse;
+import com.t3h.projectclothes.dto.common.ResponsePage;
 import com.t3h.projectclothes.dto.productvariant.ProductVariantDto;
 import com.t3h.projectclothes.dto.productvariant.ProductVariantRequest;
 import com.t3h.projectclothes.service.ProductVariantService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,69 +19,41 @@ import java.util.List;
 @RequestMapping("/api/v1/product-variant")
 public class ProductVariantController {
 
-    private final ProductVariantService productVariantService;
+  private final ProductVariantService productVariantService;
 
-    /**
-     * GET /api/v1/product-variant/list
-     */
-    @GetMapping("/list")
-    public ResponseEntity<BaseResponse<List<ProductVariantDto>>> list() {
-        List<ProductVariantDto> productVariants = productVariantService.getAll();
-        return ResponseEntity.ok(BaseResponse.success(productVariants));
-    }
+  @GetMapping("/list")
+  public ResponseEntity<BaseResponse<ResponsePage<ProductVariantDto>>> list(Pageable pageable) {
+    Page<ProductVariantDto> page = productVariantService.getAll(pageable);
+    return ResponseEntity.ok(BaseResponse.success(ResponsePage.from(page)));
+  }
 
-    /**
-     * GET /api/v1/product-variant/product/{productId}
-     */
-    @GetMapping("/product/{productId}")
-    public ResponseEntity<BaseResponse<List<ProductVariantDto>>> getByProductId(
-            @PathVariable Long productId
-    ) {
-        List<ProductVariantDto> productVariants = productVariantService.getByProductId(productId);
-        return ResponseEntity.ok(BaseResponse.success(productVariants));
-    }
+  @GetMapping("/product/{productId}")
+  public ResponseEntity<BaseResponse<List<ProductVariantDto>>> getByProductId(
+      @PathVariable Long productId) {
+    return ResponseEntity.ok(BaseResponse.success(productVariantService.getByProductId(productId)));
+  }
 
-    /**
-     * GET /api/v1/product-variant/{id}
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse<ProductVariantDto>> getById(@PathVariable Long id) {
-        ProductVariantDto productVariant = productVariantService.getById(id);
-        return ResponseEntity.ok(BaseResponse.success(productVariant));
-    }
+  @GetMapping("/{id}")
+  public ResponseEntity<BaseResponse<ProductVariantDto>> getById(@PathVariable Long id) {
+    return ResponseEntity.ok(BaseResponse.success(productVariantService.getById(id)));
+  }
 
-    /**
-     * POST /api/v1/product-variant
-     * Body: { "productId": 1, "price": 100000, "quantity": 10, "discount": 0, "attributeValueIds": [1, 2] }
-     */
-    @PostMapping
-    public ResponseEntity<BaseResponse<ProductVariantDto>> create(
-            @Valid @RequestBody ProductVariantRequest request
-    ) {
-        ProductVariantDto productVariant = productVariantService.add(request);
-        return ResponseEntity.ok(BaseResponse.success(productVariant));
-    }
+  @PostMapping
+  public ResponseEntity<BaseResponse<ProductVariantDto>> create(
+      @Valid @RequestBody ProductVariantRequest request) {
+    return ResponseEntity.ok(BaseResponse.success(productVariantService.add(request)));
+  }
 
-    /**
-     * PUT /api/v1/product-variant/{id}
-     * Body: { "productId": 1, "price": 120000, "quantity": 15, "discount": 10, "attributeValueIds": [1, 3] }
-     */
-    @PutMapping("/{id}")
-    public ResponseEntity<BaseResponse<ProductVariantDto>> update(
-            @PathVariable Long id,
-            @Valid @RequestBody ProductVariantRequest request
-    ) {
-        ProductVariantDto productVariant = productVariantService.update(id, request);
-        return ResponseEntity.ok(BaseResponse.success(productVariant));
-    }
+  @PutMapping("/{id}")
+  public ResponseEntity<BaseResponse<ProductVariantDto>> update(
+      @PathVariable Long id, @Valid @RequestBody ProductVariantRequest request) {
+    return ResponseEntity.ok(BaseResponse.success(productVariantService.update(id, request)));
+  }
 
-    /**
-     * DELETE /api/v1/product-variant/{id}
-     */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<BaseResponse<Void>> delete(@PathVariable Long id) {
-        productVariantService.delete(id);
-        return ResponseEntity.ok(BaseResponse.success(null));
-    }
+  @DeleteMapping("/{id}")
+  public ResponseEntity<BaseResponse<Void>> delete(@PathVariable Long id) {
+    productVariantService.delete(id);
+    return ResponseEntity.ok(BaseResponse.success(null));
+  }
 }
 

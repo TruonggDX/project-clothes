@@ -11,10 +11,7 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", imports = Collectors.class)
 public interface ProductVariantMapper {
-    
-    @Mapping(target = "productId", source = "product.id")
-    @Mapping(target = "productName", source = "product.name")
-    @Mapping(target = "attributeValueIds", expression = "java(entity.getAttributeValues() != null ? entity.getAttributeValues().stream().map(av -> av.getId()).collect(Collectors.toSet()) : null)")
+
     ProductVariantDto toDto(ProductVariantEntity entity);
     
     @Mapping(target = "id", ignore = true)
