@@ -8,7 +8,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,5 +50,8 @@ public class ProductEntity extends BaseEntity {
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   ProductStatus status;
+
+  @OneToMany(mappedBy = "product")
+  List<ImageEntity> images = new ArrayList<>();
 }
 
