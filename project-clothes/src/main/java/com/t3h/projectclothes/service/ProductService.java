@@ -12,5 +12,11 @@ public interface ProductService {
 
   Page<ProductDto> getAllProducts(ProductFilter filter,Pageable pageable);
 
+  ProductDto getById(Long id);
+
   ProductDto addProduct(ProductRequest productRequest, List<MultipartFile> files);
+
+  ProductDto updateProduct(Long id, ProductRequest productRequest, List<MultipartFile> files);
+
+  void deleteProduct(Long id);
 }

@@ -4,6 +4,7 @@ import com.t3h.projectclothes.dto.product.ProductDto;
 import com.t3h.projectclothes.dto.product.ProductRequest;
 import com.t3h.projectclothes.entity.ProductEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
@@ -13,4 +14,6 @@ public interface ProductMapper {
   ProductEntity toEntity(ProductDto productDto);
 
   ProductEntity toEntity(ProductRequest productRequest);
+
+  void updateProduct(ProductRequest productRequest, @MappingTarget ProductEntity productEntity);
 }
