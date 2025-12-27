@@ -40,8 +40,13 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public Page<ProductDto> getAllProducts(ProductFilter filter, Pageable pageable) {
-    Page<ProductEntity> products = productRepository.getAllProduct(filter.getCategoryId(),
-        filter.getBrandId(), pageable);
+    Page<ProductEntity> products = productRepository.getAllProduct(
+        filter.getCategoryId(),
+        filter.getBrandId(),
+        filter.getStatus(),
+        filter.getCode(),
+        filter.getName(),
+        pageable);
     return products.map(productMapper::toDto);
   }
 
