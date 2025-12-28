@@ -90,7 +90,9 @@ public class ProductServiceImpl implements ProductService {
   private void updateImage(Long id,ProductEntity product,List<MultipartFile> files){
     List<ImageEntity> entities = imageRepository.findImageEntityByProductId(id);
     for (ImageEntity image : entities){
-      imageService.deleteImage(image.getPublicId());
+      if (image.getPublicId() != null && !image.getPublicId().isEmpty()) {
+        imageService.deleteImage(image.getPublicId());
+      }
     }
     imageRepository.deleteAll(entities);
     product.getImages().clear();
