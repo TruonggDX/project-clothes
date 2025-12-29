@@ -40,9 +40,20 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public Page<ProductDto> getAllProducts(ProductFilter filter, Pageable pageable) {
-    Page<ProductEntity> products = productRepository.getAllProduct(filter.getCategoryId(),
-        filter.getBrandId(), pageable);
+    Page<ProductEntity> products = productRepository.getAllProduct(
+        filter.getCategoryId(),
+        filter.getBrandId(),
+        filter.getStatus(),
+        filter.getCode(),
+        filter.getName(),
+        pageable);
     return products.map(productMapper::toDto);
+  }
+
+  @Override
+  public ProductDto getById(Long id) {
+    ProductEntity product = getActiveProduct(id);
+    return productMapper.toDto(product);
   }
 
   @Override
@@ -50,14 +61,57 @@ public class ProductServiceImpl implements ProductService {
     ProductEntity product = productMapper.toEntity(productRequest);
     product.setCode(GenerateCode.generateCode());
     product.setIsDeleted(false);
+    setCategoryAndBrand(productRequest,product);
+    productRepository.save(product);
+    if (files != null && !files.isEmpty()) {
+      List<ImageEntity> imageEntities = uploadImage(files, product);
+      imageRepository.saveAll(imageEntities);
+    }
+    return productMapper.toDto(product);
+  }
+
+  private void setCategoryAndBrand(ProductRequest productRequest, ProductEntity product){
     CategoryEntity category = getCategoryById(productRequest.getCategoryId());
     BrandEntity brand = getBrandById(productRequest.getBrandId());
     product.setCategory(category);
     product.setBrand(brand);
+  }
+
+  @Override
+  public ProductDto updateProduct(Long id, ProductRequest productRequest, List<MultipartFile> files) {
+    ProductEntity product = getActiveProduct(id);
+    productMapper.updateProduct(productRequest, product);
+    setCategoryAndBrand(productRequest,product);
+    updateImage(id,product,files);
     productRepository.save(product);
-    List<ImageEntity> imageEntities = uploadImage(files,product);
-    imageRepository.saveAll(imageEntities);
     return productMapper.toDto(product);
+  }
+
+  private void updateImage(Long id,ProductEntity product,List<MultipartFile> files){
+    List<ImageEntity> entities = imageRepository.findImageEntityByProductId(id);
+    for (ImageEntity image : entities){
+      if (image.getPublicId() != null && !image.getPublicId().isEmpty()) {
+        imageService.deleteImage(image.getPublicId());
+      }
+    }
+    imageRepository.deleteAll(entities);
+    product.getImages().clear();
+    if (files != null && !files.isEmpty()) {
+      List<ImageEntity> imageEntities = uploadImage(files, product);
+      imageRepository.saveAll(imageEntities);
+    }
+  }
+
+  @Override
+  public void deleteProduct(Long id) {
+    ProductEntity product = getActiveProduct(id);
+    product.setIsDeleted(true);
+    productRepository.save(product);
+  }
+
+  private ProductEntity getActiveProduct(Long id) {
+    return productRepository.findByIdAndIsDeletedFalse(id)
+        .orElseThrow(() -> BusinessException.notFound("Product not found with id: " + id));
   }
 
   private CategoryEntity getCategoryById(Long id) {
@@ -72,15 +126,17 @@ public class ProductServiceImpl implements ProductService {
 
   private List<ImageEntity> uploadImage(List<MultipartFile> files, ProductEntity product) {
     List<ImageEntity> images = new ArrayList<>();
-    for (MultipartFile file : files) {
-      try {
-        String fileImage = imageService.upload(file);
-        ImageEntity image = new ImageEntity();
-        image.setImageUrl(fileImage);
-        image.setProduct(product);
-        images.add(image);
-      } catch (IOException e) {
-        throw new RuntimeException(e);
+    if (files != null) {
+      for (MultipartFile file : files) {
+        try {
+          String fileImage = imageService.upload(file);
+          ImageEntity image = new ImageEntity();
+          image.setImageUrl(fileImage);
+          image.setProduct(product);
+          images.add(image);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
       }
     }
     return images;

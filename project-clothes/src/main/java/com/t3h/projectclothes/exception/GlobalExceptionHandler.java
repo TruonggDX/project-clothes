@@ -46,7 +46,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<BaseResponse<Void>> handleException(Exception ex) {
-        BaseResponse<Void> response = BaseResponse.error(500, "Internal server error");
+        ex.printStackTrace(); // Log lỗi ra console để debug
+        BaseResponse<Void> response = BaseResponse.error(500, "Internal server error: " + ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 }

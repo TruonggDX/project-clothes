@@ -34,6 +34,8 @@ public class ImageEntity extends BaseEntity {
 
   @Column(nullable = false, length = 255)
   String imageUrl;
+
+  String publicId;
 }
 
 
