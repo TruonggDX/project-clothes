@@ -25,11 +25,18 @@ spring:
     default-encoding: UTF-8
 server:
   port: 8080
-
+cloudinary:
+  cloud-name: mediaflows_6af05438-6dd4-44bb-a568-abb4cdcd05c5
+  api-key: 812641888779897
+  api-secret: Ws0ewkeYl1ipBUud-AnkPahcF-w
 logging:
   level:
     org.springframework: INFO
     com.t3h.projectclothes: DEBUG
 
-
-
+app:
+  jwt:
+    # Chuỗi secret base64 cho JWT, có thể thay bằng chuỗi khác mạnh hơn
+    secret: VGhpcy1pcy1hLXNpbXBsZS1qd3Qtc2VjcmV0LXNob3VsZC1iZS1iYXNlNjQ=
+    # Thời gian sống của token (millisecond) - 1 ngày
+    expiration-ms: 86400000
